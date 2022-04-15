@@ -1,12 +1,12 @@
 import {Routes, Route} from 'react-router-dom'
-import Login from './routes/login/login.component'
+import Auth from './routes/authentication/auth.component'
 
 
 function App() {
   return (
     <Routes>
       <Route path="/">
-        <Route index path="auth" element={<Login />} />
+        <Route index path="auth" element={<Auth />} />
       </Route>
     </Routes>
   );

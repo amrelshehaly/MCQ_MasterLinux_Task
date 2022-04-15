@@ -28,13 +28,14 @@ const RedditTextField = styled((props) => (
     marginBlockEnd:10
   }));
 
-  const FormInput = ({label, ...otherProps}) =>{
+  const FormInput = ({label, helperText="", ...otherProps}) =>{
       return(
         <RedditTextField
         label={label}
-        id="reddit-input"
         variant="filled"
         style={{ marginTop: 11 }}
+        helperText={helperText}
+        error={helperText.length> 0? true: false}
         {...otherProps}
       />
       )
