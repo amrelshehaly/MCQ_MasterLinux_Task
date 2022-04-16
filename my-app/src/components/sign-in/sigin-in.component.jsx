@@ -6,29 +6,7 @@ import {
 import FormInput from '../form-input/form-input.component'
 import Loading from '../loading/loading.component'
 import {useNavigate} from 'react-router-dom'
-
-const useStyles = {
-    title:{
-        fontSize: 64,
-        textAlign:"center",
-        fontWeight: 400
-    },
-    subTitle: {
-        fontSize:16,
-        textAlign:"center",
-        fontWeight:400
-    },
-    loginBtn :{
-        background: '#20df7f',
-        border: 0,
-        borderRadius: 3,
-        boxShadow: '0 3px 5px 2px rgb(0 0 0 / 21%)',
-        height: 48,
-        padding: '0 30px',
-        marginBlockStart:'10px',
-        width:'300px',
-    }
-}
+import SignInStyle from './sign-in.styles'
 
 const formFields = {
     UserName: '',
@@ -55,7 +33,7 @@ const Errors = {
 
 
 const SignIn = () => {
-    const {title, subTitle, loginBtn, LoginTxt} = useStyles
+    const {title, subTitle, loginBtn, LoginTxt} = SignInStyle
     const [userForm, setuserForm] = useState(formFields)
     const [validateUser , setUserValidation] = useState(Errors)
     const [objectKey, setObjectKey] = useState('');
@@ -63,8 +41,6 @@ const SignIn = () => {
     const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
-
-    console.log(loginBtnDisable)
 
     const {
         UserName,
@@ -99,7 +75,6 @@ const SignIn = () => {
     };
 
     const handleErrorValidation = (str) =>{
-        console.log(str)
         var bool ;
         var txt ={
             txt: validateUser[str].txt

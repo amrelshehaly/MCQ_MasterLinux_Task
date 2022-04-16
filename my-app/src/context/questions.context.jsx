@@ -35,7 +35,7 @@ export const QuestionProvider = ({children}) =>{
         const idx = parseInt(name)
         const CheckAnw = dataArr.find((val)=> idx+"" === val.id)
         let newArr = [...CheckAnswers]
-        if(CheckAnw.answer == value){
+        if(CheckAnw.answer === value){
             newArr[idx-1] = true
         }else{
             newArr[idx-1] = false
@@ -61,6 +61,17 @@ export const QuestionProvider = ({children}) =>{
 
     useEffect(()=>{
         setdataArr(shuffleArray(dataArr))
+    },[dataArr])
+
+    useEffect(()=>{
+        const CreatingBoolState = () =>{
+            let newArr = []
+            for (let index = 0; index < dataArr.length; index++) {
+                newArr.push(false)
+            }
+            setCheckAnswers(newArr)
+        }
+        CreatingBoolState()
     },[dataArr])
 
     useEffect(()=>{

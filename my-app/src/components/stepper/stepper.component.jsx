@@ -1,18 +1,9 @@
-import React, {useContext, useEffect, useState, Fragment} from 'react'
 import {
     Box,
     Stepper,
     Step,
     StepLabel
 } from '@mui/material'
-import {makeStyles} from '@mui/styles'
-
-const steps = [
-    'Select master blaster campaign settings',
-    'Create an ad group',
-    'Create an ad',
-  ];
-
 
   const useStyles = {
     root: {
@@ -47,7 +38,7 @@ const SimpleStepper = ({array, countStep}) =>{
                 {array.map((label, idx) => {
                 return (
                     <Step sx={root} key={idx} >
-                        <StepLabel>{label}</StepLabel>
+                        <StepLabel></StepLabel>
                     </Step>
                 );
                 })}

@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 
 
-const RedditTextField = styled((props) => (
+const SimpleTextField = styled((props) => (
     <TextField InputProps={{ disableUnderline: true }} {...props} />
   ))(({ theme }) => ({
     "& label": {
@@ -30,7 +30,7 @@ const RedditTextField = styled((props) => (
 
   const FormInput = ({label, helperText="", ...otherProps}) =>{
       return(
-        <RedditTextField
+        <SimpleTextField
         label={label}
         variant="filled"
         style={{ marginTop: 11 }}

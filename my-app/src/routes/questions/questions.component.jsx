@@ -1,14 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {
-    Grid,
-    Button,
-    Box,
-    Stack,
-} from '@mui/material'
+import {Grid,Box} from '@mui/material'
 import {QuestionContext} from '../../context/questions.context'
 import QuestionForm from '../../components/question-form/question-form.component'
 import SimpleStepper from '../../components/stepper/stepper.component'
 import {useNavigate} from 'react-router-dom'
+import QuestionButtons from '../../components/question-button/question-buttons.component'
+import Loading from '../../components/loading/loading.component'
 
 export const Questions = () => {
 
@@ -17,10 +14,8 @@ export const Questions = () => {
     const {dataArr, handleSumTotal} = useContext(QuestionContext)
     const [QuestionArray, setQuestionArray] = useState([])
     const [QuestionCount, setQuestionCount] = useState(0);
-    // const [Question, setQuestion] = useState({})
-    const [QuestState, setQuestState] = useState([false,false,false,false,false,false,false])
+    const [QuestState, setQuestState] = useState([])
 
-    // console.log("Total Score", TotalScore)
 
     const handleQuestionAnsw = (event) =>{
         console.log(event.target.name)
@@ -28,7 +23,6 @@ export const Questions = () => {
 
         handleSumTotal(name,value)
         
-        // setQuestion(event.target.value)
         let newArr = [...QuestState]
         newArr[QuestionCount] = true;
 
@@ -53,10 +47,31 @@ export const Questions = () => {
         setQuestionArray(dataArr)
     },[dataArr])
 
+    useEffect(()=>{
+
+        const CreatingBoolState = () =>{
+            let newArr = []
+            for (let index = 0; index < QuestionArray.length; index++) {
+                newArr.push(false)
+            }
+            setQuestState(newArr)
+        }
+        CreatingBoolState()
+        
+    },[QuestionArray])
+
     return (
         <Box>
-
-            <SimpleStepper array={QuestState} countStep={QuestionCount} />
+            {
+                QuestionArray.length > 0?
+                <SimpleStepper 
+                    array={Array(QuestionArray.length).fill().map((v,i)=>i)} 
+                    countStep={QuestionCount} 
+                />
+                :
+                <Loading openLoading={true} />
+            }
+            
             
             <Grid
                 container
@@ -67,31 +82,20 @@ export const Questions = () => {
                 style={{ minHeight: '100vh',width:'100%'}}
             >
                 <Grid item xs={3} sx={{p:2}}>
-                    <QuestionForm onChange={handleQuestionAnsw} QuestionArray={QuestionArray} QuestionCount={QuestionCount} />
+                    <QuestionForm 
+                        onChange={handleQuestionAnsw} 
+                        QuestionArray={QuestionArray} 
+                        QuestionCount={QuestionCount} 
+                    />
                 </Grid>
 
-                    {
-                        QuestState.map((val, idx)=>{
-                            return(
-                                <Stack key={idx} style={QuestionCount === idx? {display:"block"}:{display:"none"}} sx={{marginY:5}} direction="row" justifyContent="center" spacing={12}>
-                                    <Button  
-                                        sx={{width:'100px', background:"#c98700"}} 
-                                        onClick={handleQuestionDecr} 
-                                        style={idx === 0? {display:"none"}: {display:"inline-flex"}}
-                                        variant="contained">
-                                            Back
-                                    </Button>
-                                    <Button 
-                                        sx={{width:'100px', background:"#00b54fcf"}} 
-                                        onClick={handleQuestionIncr} 
-                                        disabled={QuestionCount === idx && val? false : true}
-                                        variant="contained">
-                                            {QuestionArray.length - 1 > idx? 'Next':'Submit'}
-                                    </Button>
-                                </Stack>
-                            )
-                        })
-                    }     
+                       
+                <QuestionButtons 
+                    array={QuestState} 
+                    QuestionCount={QuestionCount} 
+                    NextQuestion={handleQuestionIncr} 
+                    PreviousQuestion={handleQuestionDecr} 
+                />
                 
         
                     
