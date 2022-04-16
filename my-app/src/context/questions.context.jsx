@@ -12,7 +12,7 @@ export const QuestionContext = createContext({
 
 export const QuestionProvider = ({children}) =>{
     const [dataArr, setdataArr] = useState(DATA_STORE)
-    const [CheckAnswers , setCheckAnswers] = useState([false,false,false,false,false,false,false])
+    const [CheckAnswers , setCheckAnswers] = useState([])
     const [TotalScore, setTotalScore] = useState(0);
 
     const shuffleArray = (array) => {
