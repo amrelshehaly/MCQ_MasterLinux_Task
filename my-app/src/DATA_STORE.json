@@ -1,0 +1,82 @@
+[
+    {
+        "id":"1",
+        "question":"What is the fastest animal on earth?",
+        "choices":[
+            "Cheetah",
+            "Snail",
+            "Penguin",
+            "Turtle"
+
+        ],
+        "answer":"Cheetah" 
+
+    },
+    {
+        "id":"2",
+        "question":"How many days do we have in a week ?",
+        "choices":[
+            "8",
+            "9",
+            "7",
+            "10"
+        ],
+        "answer":"7"
+    },
+    {
+        "id":"3",
+        "question":"Which animal is known as a ship of the Desert ?",
+        "choices":[
+            "Cat",
+            "Frog",
+            "Camel",
+            "Blue Whale"
+        ],
+        "answer":"Camel"
+    },
+    {
+        "id":"4",
+        "question":"Which is the largest animal in the world ?",
+        "choices":[
+            "Elephant",
+            "Crocodile",
+            "Blue Whale",
+            "Bear"
+        ],
+        "answer":"Blue Whale"
+
+    },
+    {
+        "id":"5",
+        "question":"Which is the nearest star to the planet earth ?",
+        "choices":[
+            "Mercury",
+            "Sun",
+            "Jupiter",
+            "Pluto"
+        ],
+        "answer":"Sun"
+    },
+    {
+        "id":"6",
+        "question":"Which gas is most abundant in the earth’s atmosphere ?",
+        "choices":[
+            "Nitrogen",
+            "Oxygen",
+            "Carbon dioxide",
+            "Methane"
+        ],
+        "answer":"Nitrogen"
+    },
+    {
+        "id":"7",
+        "question":"Which is the hottest continent on Earth ?",
+        "choices":[
+            "Africa",
+            "North America",
+            "Antartica",
+            "South America"
+        ],
+        "answer":"Africa"
+    }
+]
