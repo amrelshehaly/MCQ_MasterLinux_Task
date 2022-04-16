@@ -18,7 +18,6 @@ export const Questions = () => {
 
 
     const handleQuestionAnsw = (event) =>{
-        console.log(event.target.name)
         const {value, name} = event.target
 
         handleSumTotal(name,value)

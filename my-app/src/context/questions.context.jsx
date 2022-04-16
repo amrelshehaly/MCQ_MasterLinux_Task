@@ -42,7 +42,6 @@ export const QuestionProvider = ({children}) =>{
         }
         setCheckAnswers(newArr)
 
-        console.log(CheckAnswers)
     }
 
     const handleCalculateTotal = () =>{
@@ -52,11 +51,7 @@ export const QuestionProvider = ({children}) =>{
                 count++
             }
         })
-
         setTotalScore(Math.ceil((count/CheckAnswers.length)* 100))
-
-        console.log(" Total Score", TotalScore)
-
     }
 
     useEffect(()=>{

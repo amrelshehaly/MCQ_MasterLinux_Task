@@ -17,7 +17,7 @@ export const Total = () => {
            <Grid item xs={3} textAlign="center">
                 <Paper sx={{width:'330px', background:"#fad7d71a"}} elevation={10} square>
                     <Typography sx={{padding:"20%"}} variant="h3">Score</Typography>
-                    <Typography sx={{padding:"45%", color:"#01e000"}} variant="h4">{TotalScore}%</Typography>
+                    <Typography sx={{padding:"42%", color:"#01e000"}} variant="h4">{TotalScore}%</Typography>
                 </Paper>
            </Grid>
         </Grid>
