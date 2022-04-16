@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {
     Typography,
     Radio,
@@ -30,12 +30,6 @@ const useStyles ={
 
 const QuestionForm = ({QuestionArray, QuestionCount, onChange}) => {
     const {radioInput, label, paper}  = useStyles
-    // const [value, setValue] = useState('');
-
-    // const handleChange = (event) => {
-    //     setValue(event.target.value);
-    //     console.log(event.target.value)
-    //   };
 
     return (
         <Paper sx={paper} elevation={24}>

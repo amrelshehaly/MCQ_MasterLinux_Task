@@ -5,6 +5,7 @@ import {
 } from '@mui/material'
 import FormInput from '../form-input/form-input.component'
 import Loading from '../loading/loading.component'
+import {useNavigate} from 'react-router-dom'
 
 const useStyles = {
     title:{
@@ -35,25 +36,6 @@ const formFields = {
     Password: '',
 }
 
-const ValidateError = [
-   {
-        id:"UserName",
-        msg:"Must have more than 5 characters",
-        error: false
-        
-    },
-    {
-        id:"Email",
-        msg:"Email not valid",
-        error: false
-    }
-    ,
-    {
-        id:"Password",
-        msg:"Error hero",
-        error:false
-    },
-]
 
 const Errors = {
     UserName:{
@@ -79,6 +61,8 @@ const SignIn = () => {
     const [objectKey, setObjectKey] = useState('');
     const [loginBtnDisable, setloginBtnDisable] = useState(true)
     const [loading, setLoading] = useState(false)
+
+    const navigate = useNavigate()
 
     console.log(loginBtnDisable)
 
@@ -130,6 +114,7 @@ const SignIn = () => {
                 break;
             case "Password":
                 bool =  userForm.Password.length < 8? true: false
+                break;
             default:
                 break;
         }
@@ -155,11 +140,12 @@ const SignIn = () => {
         
     },[userForm])
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault()
         setLoading(true)
-        setTimeout(()=>{
-            setLoading(false)
+        setTimeout(async ()=>{
+            await setLoading(false)
+            await navigate("/home")
         },3000)
     }
 

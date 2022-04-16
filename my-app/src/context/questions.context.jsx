@@ -3,12 +3,17 @@ import DATA_STORE from '../DATA_STORE.json'
 
 
 export const QuestionContext = createContext({
-    dataArr:[]
+    dataArr:[],
+    CheckAnswers :[],
+    TotalScore: 0,
+    setCheckAnswers : () =>{},
+    setdataArr: () => {}
 })
 
 export const QuestionProvider = ({children}) =>{
     const [dataArr, setdataArr] = useState(DATA_STORE)
     const [CheckAnswers , setCheckAnswers] = useState([false,false,false,false,false,false,false])
+    const [TotalScore, setTotalScore] = useState(0);
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -24,7 +29,7 @@ export const QuestionProvider = ({children}) =>{
                 }
         }
         return array
-    }  
+    } 
 
     const handleSumTotal = (name, value) =>{
         const idx = parseInt(name)
@@ -40,11 +45,29 @@ export const QuestionProvider = ({children}) =>{
         console.log(CheckAnswers)
     }
 
+    const handleCalculateTotal = () =>{
+        let count = 0;
+        CheckAnswers.forEach((element)=>{
+            if(element){
+                count++
+            }
+        })
+
+        setTotalScore(Math.ceil((count/CheckAnswers.length)* 100))
+
+        console.log(" Total Score", TotalScore)
+
+    }
+
     useEffect(()=>{
         setdataArr(shuffleArray(dataArr))
     },[dataArr])
 
-    const value = {dataArr, handleSumTotal}
+    useEffect(()=>{
+        handleCalculateTotal()
+    },[CheckAnswers])
+
+    const value = {dataArr, handleSumTotal , CheckAnswers, TotalScore, handleCalculateTotal}
     return(
         <QuestionContext.Provider value={value}>
             {children}
