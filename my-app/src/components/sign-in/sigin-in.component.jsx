@@ -1,12 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {
     Button,
     Typography,
-} from '@mui/material';
-import {makeStyles} from '@mui/styles'
+} from '@mui/material'
 import FormInput from '../form-input/form-input.component'
+import Loading from '../loading/loading.component'
 
-const useStyles = makeStyles({
+const useStyles = {
     title:{
         fontSize: 64,
         textAlign:"center",
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
         fontWeight:400
     },
     loginBtn :{
-        background: 'linear-gradient(45deg, #20df7f 30%, #20df7fd4 90%)',
+        background: '#20df7f',
         border: 0,
         borderRadius: 3,
         boxShadow: '0 3px 5px 2px rgb(0 0 0 / 21%)',
@@ -26,11 +26,8 @@ const useStyles = makeStyles({
         padding: '0 30px',
         marginBlockStart:'10px',
         width:'300px',
-    },
-    LoginTxt:{
-        color:"white"
     }
-})
+}
 
 const formFields = {
     UserName: '',
@@ -76,11 +73,14 @@ const Errors = {
 
 
 const SignIn = () => {
-    const {title, subTitle, loginBtn, LoginTxt} = useStyles()
+    const {title, subTitle, loginBtn, LoginTxt} = useStyles
     const [userForm, setuserForm] = useState(formFields)
     const [validateUser , setUserValidation] = useState(Errors)
+    const [objectKey, setObjectKey] = useState('');
+    const [loginBtnDisable, setloginBtnDisable] = useState(true)
+    const [loading, setLoading] = useState(false)
 
-    // console.log(validateUser)
+    console.log(loginBtnDisable)
 
     const {
         UserName,
@@ -95,13 +95,24 @@ const SignIn = () => {
             [name]: value
         })
 
-        handleErrorValidation(name)
+        setObjectKey(name)
+        // handleErrorValidation(name)
 
     }
 
     const validEmailRegex = RegExp(
         /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/
-      );
+    );
+
+    const validateForm = errors => {
+    let valid = true;
+        Object.values(errors).forEach(val => {
+            if(val.state === true){
+                return false
+            }
+        });
+    return valid
+    };
 
     const handleErrorValidation = (str) =>{
         console.log(str)
@@ -133,17 +144,32 @@ const SignIn = () => {
         
     }
 
+    useEffect(()=>{
+        if(objectKey.length > 0)
+            handleErrorValidation(objectKey)
+        if(validateForm(validateUser) && UserName.length >= 5 && validEmailRegex.test(userForm.Email) && Password.length >= 8){
+            setloginBtnDisable(false)
+        }else{
+            setloginBtnDisable(true)
+        }
+        
+    },[userForm])
+
     const handleSubmit = (e) =>{
         e.preventDefault()
+        setLoading(true)
+        setTimeout(()=>{
+            setLoading(false)
+        },3000)
     }
 
 
     return (
         <form onSubmit={handleSubmit}>
-            <Typography variant="h3" gutterBottom component="div" className={title}>
+            <Typography variant="h3" gutterBottom component="div" sx={title}>
                     Sign In
                 </Typography>
-                <Typography variant="body1" gutterBottom component="div" className={subTitle}>
+                <Typography variant="body1" gutterBottom component="div" sx={subTitle}>
                     Sign in and start your MCQ exam.
                 </Typography>
                 <Typography textAlign="center" component="div">
@@ -158,11 +184,12 @@ const SignIn = () => {
                     <FormInput fullWidth helperText={validateUser.Password.state? validateUser.Password.txt :''} onChange={handleUserForm} type="password" label="Password"  name="Password" value={Password}/>
                 </Typography>
                 
-                <Typography component="div" textAlign="center">
-                    <Button className={loginBtn} >
-                        <Typography variant="body1" component="div" className={LoginTxt}>Login</Typography>
+                <Typography component="div" textAlign="center" sx={{marginY:5}}>
+                    <Button type="submit" sx={loginBtn} disabled={loginBtnDisable} variant="contained" fullWidth>
+                        <Typography sx={{fontWeight:700}} variant="body1" component="div" sx={LoginTxt}>Login</Typography>
                     </Button>
                 </Typography>
+                <Loading openLoading={loading} />
         </form>
     )
 }

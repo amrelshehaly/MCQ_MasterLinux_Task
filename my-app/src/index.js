@@ -5,9 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
 import { blue } from '@mui/material/colors';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
+import {QuestionProvider} from './context/questions.context'
 
-const theme = createTheme({
+let theme = createTheme({
   typography: {
     h3:{
       color:'white'
@@ -18,12 +19,16 @@ const theme = createTheme({
   }
 });
 
+theme = responsiveFontSizes(theme)
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
     <ThemeProvider theme={theme}>
-      <App />
+      <QuestionProvider>
+        <App />
+      </QuestionProvider>
     </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

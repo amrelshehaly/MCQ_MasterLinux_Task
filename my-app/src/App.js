@@ -1,5 +1,6 @@
 import {Routes, Route} from 'react-router-dom'
 import Auth from './routes/authentication/auth.component'
+import Questions from './routes/questions/questions.component'
 
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <Routes>
       <Route path="/">
         <Route index path="auth" element={<Auth />} />
+        <Route path="home" element={<Questions />} />
       </Route>
     </Routes>
   );
